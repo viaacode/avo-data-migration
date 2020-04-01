@@ -1,0 +1,21 @@
+/* ------------------------------------------------------------
+Data in target exists?
+Clear user and profile tables
+before import of user accounts:
+
+- Delete all entries in shared.users and related profiles
+- And reset id sequences to 1
+------------------------------------------------------------ */
+
+TRUNCATE TABLE shared.users RESTART IDENTITY CASCADE;
+ALTER SEQUENCE users.profiles_id_seq RESTART WITH 1;
+
+-- Provision migration tables
+CREATE TABLE migrate.stamboek (
+  external_uid int primary key,
+  stamboek varchar);
+
+CREATE TABLE migrate.scholen (
+  external_id int primary key,
+  entryuuid uuid unique
+)
