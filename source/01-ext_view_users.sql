@@ -1,5 +1,5 @@
 /* ------------------------------------------------------------
-IN SOURCE DATABASE testbeeld_ond
+In source
 Use existing viewUsers view for user extract
 ------------------------------------------------------------ */
 
