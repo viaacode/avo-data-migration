@@ -17,7 +17,7 @@ First clean-up some data. Then create the views for the datasets we need to migr
 Run ```target/00-prepare_db.sql```
 
 We need some temporary _migrate tables_ to hold reference data and id's for further transformation and loading of the data into the new schema's.
-Remove records for users and profiles before performing an ETL on a target database where residual data exists.
+Remove records for users and profiles before performing an ETL on a target database where residual data exists (e.g. from testing).
 
 ### 3. Perform ETL steps
 
@@ -26,3 +26,7 @@ Remove records for users and profiles before performing an ETL on a target datab
 | 1    	| Import user accounts             	| exportUsers 	| shared.users   	|        	|
 | 2    	| Create profile records for users 	|             	| users.profiles 	|        	|
 | 3    	| Add stamboek to profiles         	|             	| users.profiles 	|        	|
+
+### Clean-up target
+
+Run ```target/99-cleanup_db.sql```
