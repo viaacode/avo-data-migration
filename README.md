@@ -10,7 +10,7 @@ This repository contains the ETL-scripts needed to succesfully migrate users and
 
 Run ```source/00-prepare_db.sql```
 
-First clean-up some data. Then create the views for the datasaets we need to migrate. These views handsomely extract, aggregate and transform the essential data into a readily usable dataset for migration.
+First clean-up some data. Then create the views for the datasets we need to migrate. These views handsomely extract, aggregate and transform the essential data into a readily usable dataset for migration.
 
 ### 2. Prepare target
 
