@@ -1,10 +1,10 @@
 /* ------------------------------------------------------------
-In source
+In source TB
 Use existing viewUsers view for user extract
 ------------------------------------------------------------ */
 
 --Create view for extract
-CREATE OR ALTER VIEW exportUsers AS
+CREATE OR UPDATE VIEW exportUsers AS
 SELECT
 	vu.userId as external_uid,
 	vu.userCreatedOn as created_at,
