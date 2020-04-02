@@ -25,7 +25,7 @@ CREATE TABLE migrate.authmap (
 	idp_user_id varchar
 );
 
-CREATE TABLE migrate.scholen (
+CREATE TABLE migrate.onderwijsinstellingen (
   external_id int primary key,
   entryuuid uuid unique,
   o
