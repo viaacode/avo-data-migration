@@ -1,6 +1,12 @@
 /* ------------------------------------------------------------
 In source TB
 Use existing viewUsers view for user extract
+
+# registrationStatus = "Account status" in Tableau
+	0: Invited = "Te reactiveren account"
+	1: Registered = "Actieve account"
+	2: Blocked = "Geblokkeerde account"
+	=> only status 2 is_blocked TRUE
 ------------------------------------------------------------ */
 
 --Create view for extract
@@ -36,7 +42,7 @@ SELECT
 	vu.schoolId as organisation_id,
   -- Map registration status (invited, registered, blocked) to is_blocked? status
 	CASE
-		WHEN vu.registrationStatus = 0 THEN TRUE
+		WHEN vu.registrationStatus = 0 THEN FALSE
 		WHEN vu.registrationStatus = 1 THEN FALSE
 		WHEN vu.registrationStatus = 2 THEN TRUE
 	END as is_blocked
