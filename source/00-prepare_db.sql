@@ -1,4 +1,6 @@
--- in source TB
+/* in source TB
+TODO: make sure this is done on restore
+*/
 
 -- Cleanup usernames
 ALTER TABLE users drop index name;
