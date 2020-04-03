@@ -1,6 +1,6 @@
 -- in source TB
 
-CREATE OR UPDATE VIEW exportAuthMap AS
+CREATE OR REPLACE VIEW exportAuthMap AS
 SELECT
 	uid as external_uid,
 	UPPER(module) as idp,

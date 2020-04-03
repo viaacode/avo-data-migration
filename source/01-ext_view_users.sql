@@ -1,6 +1,6 @@
 /* ------------------------------------------------------------
 In source TB
-Use existing viewUsers view for user extract
+Use existing "viewUsers" view for user extract
 
 # registrationStatus = "Account status" in Tableau
 	0: Invited = "Te reactiveren account"

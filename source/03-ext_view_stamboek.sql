@@ -3,7 +3,7 @@
 CREATE OR UPDATE  VIEW exportStamboek AS
 SELECT
     u.uid as external_uid,
-    GROUP_CONCAT(SUBSTRING(rl.field_registratie_leraarkaart_value, 1, 11)) as stamboek
+    GROUP_CONCAT(DISTINCT(SUBSTRING(rl.field_registratie_leraarkaart_value, 1, 11))) as stamboek
 FROM users u
 LEFT JOIN
     profile p ON p.uid = u.uid
