@@ -1,22 +1,3 @@
---- draft ----
-
-
-DROP TABLE migrate.usersprofilesschools;
-
-CREATE TABLE migrate.usersprofilesschools (
-  external_uid int,
-  entryuuid uuid,
-  o varchar,
-  ou varchar
-);
-
-UPDATE migrate.usersprofilesschools AS mu
-SET entryuuid = s.entryuuid
-FROM (SELECT entryuuid, o FROM migrate.onderwijsinstellingen) AS s
-WHERE mu.o = s.o;
-
-select * from migrate.usersprofilesschools limit 100;
-
 -- in target
 
 DO LANGUAGE PLPGSQL $$

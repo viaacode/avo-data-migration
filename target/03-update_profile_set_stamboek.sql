@@ -1,4 +1,7 @@
--- in target
+/*
+in target
+Deprecated if set in '01-create_profile_for_each_user.sql'
+*/
 
 UPDATE users.profiles up
 	SET stamboek = sq.stamboek
