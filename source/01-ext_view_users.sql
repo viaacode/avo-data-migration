@@ -9,8 +9,8 @@ Use existing viewUsers view for user extract
 	=> only status 2 is_blocked TRUE
 ------------------------------------------------------------ */
 
---Create view for extract
-CREATE OR UPDATE VIEW exportUsers AS
+-- Create view for extract
+CREATE OR REPLACE VIEW exportUsers AS
 SELECT
 	vu.userId as external_uid,
 	vu.userCreatedOn as created_at,
@@ -39,7 +39,7 @@ SELECT
   -- do not use userFamilyName and userGivenName from viewUsers as they are often empty
 	IFNULL(TRIM(vu.userFamilyName), TRIM(REPLACE(u.name, SUBSTRING_INDEX(u.name, ' ', 1), ''))) as last_name,
 	IFNULL(TRIM(vu.userGivenName), TRIM(REPLACE(u.name, SUBSTRING_INDEX(u.name, ' ', -1), ''))) as first_name,
-	vu.schoolId as organisation_id,
+	SUBSTRING_INDEX(vu.schoolId, '_', 1) as organisation_id,
   -- Map registration status (invited, registered, blocked) to is_blocked? status
 	CASE
 		WHEN vu.registrationStatus = 0 THEN FALSE
@@ -49,4 +49,9 @@ SELECT
 FROM viewUsers vu
 LEFT JOIN
 	users u ON u.uid = vu.userId
+LEFT JOIN
+    profile p ON p.uid = vu.userId
+LEFT JOIN
+    field_data_field_registratie_leraarkaart rl ON rl.entity_id = p.pid
+GROUP BY vu.userId
 ORDER BY userID ASC;
