@@ -2,7 +2,7 @@
 
 -- Create table for future mapping of Drupal profiles to avo2 profiles
 CREATE TABLE reference_profile_ids (
-  external_uid int primary key,
+  user_id varchar(36) primary key,
   profile_id varchar(36),
   pid int
 );
