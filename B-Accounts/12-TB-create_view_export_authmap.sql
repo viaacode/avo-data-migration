@@ -2,7 +2,7 @@
 
 CREATE OR REPLACE VIEW viewAuthMap AS
 SELECT
-	r.external_uid as external_uid,
+	r.user_id as local_user_id,
 	UPPER(a.module) as idp,
 	a.authname as idp_user_id
 FROM authmap a
