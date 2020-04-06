@@ -1,6 +1,6 @@
 -- in source TB
 
-CREATE OR REPLACE VIEW viewAuthMap AS
+CREATE OR REPLACE VIEW export UsersIdpmap AS
 SELECT
 	r.user_id as local_user_id,
 	UPPER(a.module) as idp,

@@ -1,6 +1,8 @@
+/* from source TB to target AVO */
 
+SELECT * FROM exportUsersIdpmap;
 
-/* when using a migrate.table in AVO */
+/* when using a migrate.table in AVO
 
 WITH tmp AS (
 SELECT
@@ -12,4 +14,4 @@ FROM
 INNER JOIN
 	shared.users su ON su.external_uid = ma.external_uid)
 INSERT INTO users.idp_map (local_user_id,idp,idp_user_id)
-SELECT * from tmp;
+SELECT * from tmp; */
