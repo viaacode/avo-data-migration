@@ -4,11 +4,13 @@
 
 CREATE OR REPLACE VIEW exportUsersProfiles AS
 SELECT
-	vu.userId as external_uid,
+	r.user_id as user_id,
 	GROUP_CONCAT(DISTINCT(SUBSTRING(rl.field_registratie_leraarkaart_value, 1, 11))) as stamboek,
 	SUBSTRING_INDEX(vu.schoolId, '_', 1) as o,
   REPLACE(vu.schoolId, '_', '-') as ou
 FROM viewUsers vu
+LEFT JOIN
+	reference_user_ids r on r.external_uid = vu.userId
 LEFT JOIN
 	users u ON u.uid = vu.userId
 LEFT JOIN

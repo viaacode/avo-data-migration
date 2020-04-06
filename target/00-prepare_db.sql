@@ -13,7 +13,7 @@ TRUNCATE TABLE users.profile_organizations RESTART IDENTITY CASCADE;
 DROP TABLE IF EXISTS migrate.users_profiles_stamboek;
 DROP TABLE IF EXISTS migrate.users_authmap;
 DROP TABLE IF EXISTS migrate.users_profiles_organizations;
-DROP TABLE IF EXISTS migrate.ref_organizations;
+DROP TABLE IF EXISTS migrate.reference_organizations;
 DROP TABLE IF EXISTS migrate.ref_mediamosa_items;
 
 -- Provision migration tables

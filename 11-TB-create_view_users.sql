@@ -1,5 +1,5 @@
 /* ------------------------------------------------------------
-In source TB
+In source TESTBEELD
 Use existing "viewUsers" view for user extract
 
 # registrationStatus = "Account status" in Tableau
@@ -51,7 +51,8 @@ LEFT JOIN
 	users u ON u.uid = vu.userId
 LEFT JOIN
     profile p ON p.uid = vu.userId
-LEFT JOIN
-    field_data_field_registratie_leraarkaart rl ON rl.entity_id = p.pid
 GROUP BY vu.userId
 ORDER BY userID ASC;
+
+
+-- INSERT INTO AVO2.shared.users
