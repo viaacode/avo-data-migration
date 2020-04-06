@@ -1,4 +1,6 @@
--- in target
+
+
+/* when using a migrate.table in AVO */
 
 WITH tmp AS (
 SELECT
