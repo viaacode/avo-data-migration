@@ -35,7 +35,7 @@ By this point we have aggregated all user accounts and their respective profiles
 * Step 8: copy avo1 favorites and watch_laters into avo2 app.item_bookmarks
 * Step 9: copy users collections excluding already migrated collections into avo2 app.collections from export Collections view
 * Step 10: copy avo2 collection id's and their corresponding avo1_id's from avo2 to avo1 * reference_collection_ids
-* Step 11: copy collection items from avo1 to avo2 app.collection_fragments from exportFragments view in avo1
+* Step 11: copy collection descriptions and items from avo1 to avo2 app.collection_fragments from exportFragments view in avo1
 
 Now if a users would log in to avo2 he or she would have an acocunt and prodile where they have all of their collections and bookmarks as they were in avo1.
 
@@ -45,7 +45,7 @@ We only migrate news entries since all other pages and bundles differ too much a
 
 * Step 12: copy news from avo1 to avo2 app.content
 * Step 13: copy content id's from avo2 to avo1 reference_content_ids
-* Step 13: copy news body from avo1 to avo2 app.content from exportContentNews view in avo1
+* Step 13: copy news body from avo1 to avo2 app.content_blocks from exportContentNews view in avo1
 
 ## Finalizing
 
