@@ -9,14 +9,13 @@ Use existing "viewUsers" view for user extract
 	=> only status 2 is_blocked TRUE
 ------------------------------------------------------------ */
 
--- Create view for extract
+-- Create view for extracting user accounts
 CREATE OR REPLACE VIEW exportUsers AS
 SELECT
-	vu.userId as external_uid,
 	vu.userCreatedOn as created_at,
 	LOWER(vu.userMail) as mail,
   -- Map Drupal roles to avo2 base roles in shared.roles
-	CASE
+	CAST(LEFT(GROUP_CONCAT(DISTINCT(CASE
 		WHEN vu.roleID = 1 THEN NULL -- n.a.
 		WHEN vu.roleID = 2 THEN NULL -- n.a.
 		WHEN vu.roleID = 21 THEN 10 -- redacteur
@@ -34,12 +33,13 @@ SELECT
 		WHEN vu.roleID = 141 THEN 6 -- contentpartner
 		WHEN vu.roleID = 151 THEN 5 -- medewerker
 		WHEN vu.roleID = 161 THEN NULL -- n.a.
-	END as role_id,
-	vu.roleName as "type",
+	END)),1) AS unsigned) as role_id,
+	-- vu.roleName as "type",
   -- do not use userFamilyName and userGivenName from viewUsers as they are often empty
-	IFNULL(TRIM(vu.userFamilyName), TRIM(REPLACE(u.name, SUBSTRING_INDEX(u.name, ' ', 1), ''))) as last_name,
-	IFNULL(TRIM(vu.userGivenName), TRIM(REPLACE(u.name, SUBSTRING_INDEX(u.name, ' ', -1), ''))) as first_name,
-	SUBSTRING_INDEX(vu.schoolId, '_', 1) as organisation_id,
+	GROUP_CONCAT(DISTINCT(IFNULL(TRIM(vu.userGivenName), SUBSTRING_INDEX(TRIM(u.name), ' ', 1)))) as first_name,
+	GROUP_CONCAT(DISTINCT(IFNULL(TRIM(vu.userFamilyName), TRIM(REPLACE(u.name, SUBSTRING_INDEX(u.name, ' ', 1), ''))))) as last_name,
+  -- SUBSTRING_INDEX(vu.schoolId, '_', 1) as organisation_id,
+	vu.userId as external_uid,
   -- Map registration status (invited, registered, blocked) to is_blocked? status
 	CASE
 		WHEN vu.registrationStatus = 0 THEN FALSE
@@ -51,8 +51,7 @@ LEFT JOIN
 	users u ON u.uid = vu.userId
 LEFT JOIN
     profile p ON p.uid = vu.userId
-GROUP BY vu.userId
-ORDER BY userID ASC;
-
-
--- INSERT INTO AVO2.shared.users
+-- omit previously migrated records
+-- WHERE vu.userId NOT IN (1)
+GROUP BY vu.userId, mail
+ORDER BY vu.userId ASC;
